@@ -1,19 +1,19 @@
 ﻿#include "CMyMainWnd.h"
 
 //имена файлов
-char FileNames[][2][30] = {
-	{"Figures\\Figure1.txt","Figures\\Figure1m.txt"},
-	{"Figures\\Figure2.txt","Figures\\Figure2m.txt"},
-	{"Figures\\Figure3.txt","Figures\\Figure3m.txt"},
-	{"Figures\\Figure4.txt","Figures\\Figure4m.txt"},
-	{"Figures\\Figure5.txt","Figures\\Figure5m.txt"},
-	{"Figures\\Figure6.txt","Figures\\Figure6m.txt"}
+wchar_t FileNames[][2][30] = {
+	{L"Figures\\Figure1.txt",L"Figures\\Figure1m.txt"},
+	{L"Figures\\Figure2.txt",L"Figures\\Figure2m.txt"},
+	{L"Figures\\Figure3.txt",L"Figures\\Figure3m.txt"},
+	{L"Figures\\Figure4.txt",L"Figures\\Figure4m.txt"},
+	{L"Figures\\Figure5.txt",L"Figures\\Figure5m.txt"},
+	{L"Figures\\Figure6.txt",L"Figures\\Figure6m.txt"}
 };
 const double ONE_GR = 0.017453293;
 //const int numof_figures = 6;
 CMyMainWnd::CMyMainWnd()
 {
-	Create(NULL, "КГ лабраб №6.", WS_OVERLAPPEDWINDOW, rectDefault, NULL, NULL); // Создать окно программы
+	Create(NULL, L"КГ лабраб №6.", WS_OVERLAPPEDWINDOW, rectDefault, NULL, NULL); // Создать окно программы
 	m_wndMenu.LoadMenu(IDR_MENU1); // Загрузить меню из файла ресурса
 	SetMenu(&m_wndMenu);      // Установить меню
 
@@ -55,7 +55,6 @@ BEGIN_MESSAGE_MAP(CMyMainWnd, CFrameWnd)
 	ON_COMMAND(ID_PROEC_ONEPOINT, MenuPROEC_ONEPOINT)
 	ON_COMMAND(ID_PROEC_TWOPOINT, MenuPROEC_TWOPOINT)
 	ON_COMMAND(ID_PROEC_THREEPOINT, MenuPROEC_THREEPOINT)
-	ON_COMMAND(ID_TOWEB, MenuTosait)
 	ON_COMMAND(ID_EXIT, MenuEXIT)
 END_MESSAGE_MAP()
 
@@ -67,7 +66,8 @@ void CMyMainWnd::MenuTetr()
 	if (figures[figureActive].loadFigureFromFile(FileNames[figureActive][0], FileNames[figureActive][1]))
 	{
 		figureActive = -1;
-		//MessageBox("не получилось загрузить",NULL,MB_OK);
+		MessageBox(L"не получилось загрузить",NULL,MB_OK);
+		return;
 	}
 	figures[figureActive].Rotation(0, -5 * ONE_GR, 0);
 	InvalidateRect(false);
@@ -121,15 +121,10 @@ void CMyMainWnd::MenuHelp()
 	CDialog about(IDD_DIALOG1);
 	about.DoModal();
 }
-void CMyMainWnd::MenuTosait()
-{
-	ShellExecute(NULL, "open", "http://aa-shi.narod.ru/graphics/roberts/", "", "c:\\", SW_SHOWNORMAL);
-}
 void CMyMainWnd::MenuPROEC_ORT()
 {
 	figures[figureActive].typeofProection = 1;
 	InvalidateRect(false);
-
 }
 void CMyMainWnd::MenuPROEC_ISO()
 {
@@ -183,7 +178,7 @@ void CMyMainWnd::MenuPrLight()
 	figures[figureActive].lampa.C.y = (double)about.get_LightY();
 	figures[figureActive].lampa.C.z = (double)about.get_LightZ();
 	figures[figureActive].lampa.I = about.get_LightI();
-	figures[figureActive].ifLightKrest = about.get_check_Krest();
+	figures[figureActive].ifLightKrest = about.IsCrossChecked();
 	InvalidateRect(false);
 }
 void CMyMainWnd::MenuPrFig()
@@ -197,9 +192,9 @@ void CMyMainWnd::MenuPrFig()
 	figures[figureActive].ifdrawRebra = about.get_check_Rebra();
 	figures[figureActive].ifdrawGuro = about.get_check_Paint();
 	figures[figureActive].kD = about.get_KdReflection();
-	figures[figureActive].ColorR = about.get_FColorR();
-	figures[figureActive].ColorG = about.get_FColorG();
-	figures[figureActive].ColorB = about.get_FColorB();
+	figures[figureActive].ColorR = about.GetColorR();
+	figures[figureActive].ColorG = about.GetColorG();
+	figures[figureActive].ColorB = about.GetColorB();
 
 	InvalidateRect(false);
 }
@@ -258,57 +253,105 @@ afx_msg void CMyMainWnd::OnKeyDown(UINT a, UINT b, UINT c)
 {
 	switch (a) {
 		//перемещения
-	case VK_LEFT: figures[figureActive].Transposition2(-10, 0, 0);
+	case VK_LEFT:
+	{
+		figures[figureActive].Transposition2(-10, 0, 0);
 		break;
-	case VK_RIGHT: figures[figureActive].Transposition2(10, 0, 0);
+	}
+	case VK_RIGHT:
+	{
+		figures[figureActive].Transposition2(10, 0, 0);
 		break;
-	case VK_UP: figures[figureActive].Transposition2(0, -10, 0);
+	}
+	case VK_UP:
+	{
+		figures[figureActive].Transposition2(0, -10, 0);
 		break;
-	case VK_DOWN: figures[figureActive].Transposition2(0, 10, 0);
+	}
+	case VK_DOWN:
+	{
+		figures[figureActive].Transposition2(0, 10, 0);
 		break;
-	case '1': figures[figureActive].Transposition2(0, 0, -10);
+	}
+	case '1':
+	{
+		figures[figureActive].Transposition2(0, 0, -10);
 		break;
-	case '2': figures[figureActive].Transposition2(0, 0, 10);
+	}
+	case '2':
+	{
+		figures[figureActive].Transposition2(0, 0, 10);
 		break;
-		//растяжение/сжатие
-		  //PgUp
-	case 33: figures[figureActive].Dilatation(1.02, 1.02, 1.02);
+	}
+
+
+	//растяжение/сжатие
+	case 33: //PgUp 
+	{
+		figures[figureActive].Dilatation(1.02, 1.02, 1.02);
 		break;
-		//PgDwn
-	case 34: figures[figureActive].Dilatation(0.98, 0.98, 0.98);
+	}
+	//PgDwn
+	case 34:
+	{
+		figures[figureActive].Dilatation(0.98, 0.98, 0.98);
 		break;
-		//вращения
-		  //'a'
-	case 65: figures[figureActive].Rotation(0, 5 * ONE_GR, 0);
+	}
+
+	//вращения
+	case 65:	//'a'
+	{
+		figures[figureActive].Rotation(0, 5 * ONE_GR, 0);
 		break;
-		//'d'
-	case 68: figures[figureActive].Rotation(0, -5 * ONE_GR, 0);
+	}
+	case 68:	//'d'
+	{
+		figures[figureActive].Rotation(0, -5 * ONE_GR, 0);
 		break;
-		//'s'
-	case 83: figures[figureActive].Rotation(-5 * ONE_GR, 0, 0);
+	}
+	case 83:	//'s'
+	{
+		figures[figureActive].Rotation(-5 * ONE_GR, 0, 0);
 		break;
-		//'w'
-	case 87: figures[figureActive].Rotation(5 * ONE_GR, 0, 0);
+	}
+	case 87:	//'w'
+	{
+		figures[figureActive].Rotation(5 * ONE_GR, 0, 0);
 		break;
-		//'q'
-	case 81: figures[figureActive].Rotation(0, 0, 5 * ONE_GR);
+	}
+	case 81:	//'q'
+	{
+		figures[figureActive].Rotation(0, 0, 5 * ONE_GR);
 		break;
-		//'e'
-	case 69: figures[figureActive].Rotation(0, 0, -5 * ONE_GR);
+	}
+	case 69:	//'e'
+	{
+		figures[figureActive].Rotation(0, 0, -5 * ONE_GR);
 		break;
-		//отражения
-		  //'x'
-	case 88: figures[figureActive].Reflection(-1);
+	}
+	//отражения
+
+	case 88:	//'x'
+	{
+		figures[figureActive].Reflection(-1);
 		break;
-		//'y'
-	case 89: figures[figureActive].Reflection(1, -1);
+	}
+
+	case 89:	//'y'
+	{
+		figures[figureActive].Reflection(1, -1);
 		break;
-		//'z'
-	case 90: figures[figureActive].Reflection(1, 1, -1);
+	}
+	case 90:	//'z'
+	{
+		figures[figureActive].Reflection(1, 1, -1);
 		break;
-		//'F5'
-	case 116: CMyMainWnd::MenuDod();
+	}
+	case 116: //'F5'
+	{
+		CMyMainWnd::MenuDod();
 		break;
+	}
 	}
 	InvalidateRect(false);
 }

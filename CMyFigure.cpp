@@ -44,15 +44,15 @@ CMyFigure::~CMyFigure()
 
 }
 /*загрузить фигуру из файла. возвращает 0 если удалось загрузить.*/
-int CMyFigure::loadFigureFromFile(char filename1[], char filenameM[])
+int CMyFigure::loadFigureFromFile(wchar_t filename[], wchar_t filenameM[])
 {
 	char bufer[1000], bbuf[10];
 	int n, i, j, c;
 
-	if (!filename1)return 1;
+	if (!filename)return 1;
 	if (!filenameM)return 1;
 	//читаем файл с вершинами
-	if (!file.Open(filename1, CFile::modeRead))return 1;
+	if (!file.Open(filename, CFile::modeRead))return 1;
 	file.Read(bufer, sizeof(bufer));
 	file.Close();
 

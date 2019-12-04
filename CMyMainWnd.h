@@ -40,7 +40,6 @@ public:
 	void MenuPROEC_THREEPOINT();
 	void MenuPrLight();
 	void MenuPrFig();
-	void MenuTosait();
 
 	BOOL OnEraseBkgnd(CDC* pDC);
 	void OnPaint();

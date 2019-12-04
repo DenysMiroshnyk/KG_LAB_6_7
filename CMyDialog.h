@@ -9,7 +9,7 @@ public:
 	CMyDialog(UINT nIDTemplate, CWnd* pParentWnd = NULL);
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
-	afx_msg void edit_KdReflection();
+	afx_msg void SetReflection();
 	afx_msg void edit_LightIntensive();
 	afx_msg void edit_LightX();
 	afx_msg void edit_LightY();
@@ -27,23 +27,23 @@ public:
 	bool get_check_Vertex();
 	bool get_check_Rebra();
 	bool get_check_Paint();
-	bool get_check_Krest();
-	int get_FColorR();
-	int get_FColorG();
-	int get_FColorB();
+	bool IsCrossChecked();
+	int GetColorR();
+	int GetColorG();
+	int GetColorB();
 	void set_Light(int x, int y, int z, double I, bool Krest);
 	void set_Figure(double kd, bool V, bool R, bool P, int ClrR, int ClrG, int ClrB);
-	void edit_FColorR();
-	void edit_FColorG();
-	void edit_FColorB();
+	void SetColorR();
+	void SetColorG();
+	void SetColorB();
 	void Figure_ButtonColor();
 
 private:
 	DECLARE_MESSAGE_MAP();
-	char ch1[10];
-	int x, y, z, ClrR, ClrG, ClrB;
+	wchar_t ch1[10];
+	int x, y, z, R, G, B;
 	double I, kd;
-	bool V, R, P, KREST;
+	bool vertex, rebra, paint, cross;
 
 	int mytype;
 };

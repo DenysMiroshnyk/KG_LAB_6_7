@@ -48,7 +48,6 @@
 #define ID_40046                        40046
 #define ID_PROPERTIES_FIGURE            40047
 #define ID_PROPERTIES_LIGHT             40048
-#define ID_TOWEB                        40049
 
 // Next default values for new objects
 // 

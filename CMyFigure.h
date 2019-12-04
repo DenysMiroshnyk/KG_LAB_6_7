@@ -78,6 +78,6 @@ public:
 	CMyFigure(); //
 	~CMyFigure();
 	void CMyFigure::Clear();//деструктор + конструктор, который можно вызвать
-	int loadFigureFromFile(char filename[], char filenameM[]);//см. имя функции:)
+	int loadFigureFromFile(wchar_t filename[], wchar_t filenameM[]);//см. имя функции:)
 	int drawFigure(CDC* dc);
 };

@@ -4,6 +4,6 @@
 class CMyApp : public CWinApp
 {
 public:
-	CMyApp(); // конструктор по умолчанию
+	CMyApp()= default; // конструктор по умолчанию
 	virtual BOOL InitInstance(); // стандартная инициализация
 };

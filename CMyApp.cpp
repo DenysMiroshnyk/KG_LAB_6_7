@@ -1,8 +1,5 @@
 ﻿#include "CMyApp.h"
 
-CMyApp::CMyApp() // конструктор главного класса приложения
-{}
-
 BOOL CMyApp::InitInstance() // стандартная инициализация
 {
 	m_pMainWnd = new CMyMainWnd();
