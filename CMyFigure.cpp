@@ -49,10 +49,15 @@ int CMyFigure::loadFigureFromFile(wchar_t filename[], wchar_t filenameM[])
 	char bufer[1000], bbuf[10];
 	int n, i, j, c;
 
-	if (!filename)return 1;
-	if (!filenameM)return 1;
+	if (!filename || !filenameM)
+	{
+		return 1;
+	}
 	//читаем файл с вершинами
-	if (!file.Open(filename, CFile::modeRead))return 1;
+	if (!file.Open(filename, CFile::modeRead))
+	{
+		return 1;
+	}
 	file.Read(bufer, sizeof(bufer));
 	file.Close();
 
@@ -76,7 +81,10 @@ int CMyFigure::loadFigureFromFile(wchar_t filename[], wchar_t filenameM[])
 	{
 		if (bufer[i] == '	' || bufer[i] == ' ' || bufer[i] == '\0' || bufer[i] == '\n')
 		{
-			if (c == 0) vertex[n].x = atoi(bbuf);
+			if (c == 0)
+			{
+				vertex[n].x = atoi(bbuf);
+			}
 			else if (c == 1) vertex[n].y = atoi(bbuf);
 			else if (c == 2) vertex[n].z = atoi(bbuf);
 			else
