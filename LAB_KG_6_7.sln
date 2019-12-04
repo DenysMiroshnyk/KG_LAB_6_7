@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab_KG_6_7", "CG_doit_6.vcxproj", "{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		ReleaseSharedDLL|Win32 = ReleaseSharedDLL|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}.Debug|Win32.Build.0 = Debug|Win32
+		{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}.Release|Win32.ActiveCfg = Release|Win32
+		{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}.Release|Win32.Build.0 = Release|Win32
+		{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}.ReleaseSharedDLL|Win32.ActiveCfg = ReleaseSharedDLL|Win32
+		{E1263A4F-3AE3-4C76-A217-8278F50D5CAF}.ReleaseSharedDLL|Win32.Build.0 = ReleaseSharedDLL|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F712794A-38B0-452E-AF65-8B1F78DE91B0}
+	EndGlobalSection
+EndGlobal
